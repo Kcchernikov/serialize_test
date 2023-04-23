@@ -1,0 +1,7 @@
+lxml
+jsonpickle
+protobuf==3.17.1
+grpcio-tools==1.44.0
+avro
+pyyaml
+msgpack

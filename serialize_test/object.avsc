@@ -1,0 +1,11 @@
+{"namespace": "test",
+ "type": "record",
+ "name": "Object",
+ "fields": [
+     {"name": "integer", "type": "int"},
+     {"name": "string",  "type": "string"},
+     {"name": "dict", "type": {"type": "map", "values": "int"}},
+     {"name": "real", "type": "float"},
+     {"name": "arr", "type": {"type": "array", "items": "int"}}
+ ]
+}

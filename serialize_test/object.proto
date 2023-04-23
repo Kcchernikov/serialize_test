@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+message ObjectProto {
+    int32 Integer = 1;
+    string String = 2;
+    map<string, int32> Dict = 3;
+    float Real = 4;
+    repeated int32 Arr = 5;
+}

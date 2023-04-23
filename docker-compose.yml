@@ -1,0 +1,127 @@
+version: "3.4"
+services:
+  proxy:
+    build: ./proxy
+    container_name: serialize-test-proxy
+    hostname: "serialize-test-proxy"
+    # environment:
+      # - FORMAT=pickle
+    links:
+      - pickle
+      - xml
+      - json
+      - proto
+      - avro
+      - yaml
+      - msgpack
+    depends_on:
+      - pickle
+      - xml
+      - json
+      - proto
+      - avro
+      - yaml
+      - msgpack
+    # Перезапускаем сервис в случае падения 
+    restart: on-failure
+    # Прокладывам путь для файлов
+    volumes:
+      - ./proxy:/proxy
+    # Открываем порт в контейнер
+    ports:
+      - "2000:2000/udp"
+    networks:
+      - mynet
+  pickle:
+    build: ./serialize_test
+    container_name: serialize-test-pickle
+    hostname: "serialize-test-pickle"
+    environment:
+      - FORMAT=pickle
+    restart: on-failure
+    volumes:
+      - ./serialize_test:/serialize_test
+    ports:
+      - "2001:2000/udp"
+    networks:
+      - mynet
+  xml:
+    build: ./serialize_test
+    container_name: serialize-test-xml
+    hostname: "serialize-test-xml"
+    environment:
+      - FORMAT=xml
+    restart: on-failure
+    volumes:
+      - ./serialize_test:/serialize_test
+    ports:
+      - "2002:2000/udp"
+    networks:
+      - mynet
+  json:
+    build: ./serialize_test
+    container_name: serialize-test-json
+    hostname: "serialize-test-json"
+    environment:
+      - FORMAT=json
+    restart: on-failure
+    volumes:
+      - ./serialize_test:/serialize_test
+    ports:
+      - "2003:2000/udp"
+    networks:
+      - mynet
+  proto:
+    build: ./serialize_test
+    container_name: serialize-test-proto
+    hostname: "serialize-test-proto"
+    environment:
+      - FORMAT=proto
+    restart: on-failure
+    volumes:
+      - ./serialize_test:/serialize_test
+    ports:
+      - "2004:2000/udp"
+    networks:
+      - mynet
+  avro:
+    build: ./serialize_test
+    container_name: serialize-test-avro
+    hostname: "serialize-test-avro"
+    environment:
+      - FORMAT=avro
+    restart: on-failure
+    volumes:
+      - ./serialize_test:/serialize_test
+    ports:
+      - "2005:2000/udp"
+    networks:
+      - mynet
+  yaml:
+    build: ./serialize_test
+    container_name: serialize-test-yaml
+    hostname: "serialize-test-yaml"
+    environment:
+      - FORMAT=yaml
+    restart: on-failure
+    volumes:
+      - ./serialize_test:/serialize_test
+    ports:
+      - "2006:2000/udp"
+    networks:
+      - mynet
+  msgpack:
+    build: ./serialize_test
+    container_name: serialize-test-msgpack
+    hostname: "serialize-test-msgpack"
+    environment:
+      - FORMAT=msgpack
+    restart: on-failure
+    volumes:
+      - ./serialize_test:/serialize_test
+    ports:
+      - "2007:2000/udp"
+    networks:
+      - mynet
+networks:
+  mynet:
