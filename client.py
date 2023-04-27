@@ -18,9 +18,14 @@ class Object:
 
 
 ob = Object()
-serType = input("Write one of serialization types:\n\tpickle,\n\txml,\n\tjson,\n\tproto,\n\tavro,\n\tyaml,\n\tmsgpack\n") + " "
+serType = input("Write one of serialization types:\n\tpickle,\n\txml,\n\tjson,\n\tproto,\n\tavro,\n\tyaml,\n\tmsgpack,\n\tall\n") + " "
 data = b'get_result ' + serType.encode() + pickle.dumps(ob)
 udp_socket.sendto(data, addr)
-message, addr = udp_socket.recvfrom(1024)
-print(message.decode())
+if (serType == "all "):
+    for i in range(7):
+        message, addr = udp_socket.recvfrom(1024)
+        print(message.decode())
+else:
+    message, addr = udp_socket.recvfrom(1024)
+    print(message.decode())
 

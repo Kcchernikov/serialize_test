@@ -4,8 +4,6 @@ services:
     build: ./proxy
     container_name: serialize-test-proxy
     hostname: "serialize-test-proxy"
-    # environment:
-      # - FORMAT=pickle
     links:
       - pickle
       - xml

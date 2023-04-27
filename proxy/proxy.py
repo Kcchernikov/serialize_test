@@ -41,5 +41,11 @@ while True:
         if serType[0] in addr:
             print("sended to", addr[serType[0]], flush=True)
             udp_socket.sendto(b"get_result " + serType[1], addr[serType[0]])
-            message, server_addr = udp_socket.recvfrom(1024)
+            message, server_addr = udp_socket.recvfrom(10024)
             udp_socket.sendto(message, client_addr)
+        elif serType[0] == "all":
+            for type in addr:
+                print("sended to", addr[type], flush=True)
+                udp_socket.sendto(b"get_result " + serType[1], addr[type])
+                message, server_addr = udp_socket.recvfrom(10024)
+                udp_socket.sendto(message, client_addr)
