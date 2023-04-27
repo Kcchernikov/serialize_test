@@ -37,6 +37,9 @@ while True:
     if message[0:11] == b"get_result ":
         message = message[11:]
         serType = message.split(maxsplit=1)
+        if (len(serType) < 2):
+            print("Structure to serialize was not found", flush=True)
+            continue
         serType[0] = serType[0].decode()
         if serType[0] in addr:
             print("sended to", addr[serType[0]], flush=True)
@@ -49,3 +52,5 @@ while True:
                 udp_socket.sendto(b"get_result " + serType[1], addr[type])
                 message, server_addr = udp_socket.recvfrom(10024)
                 udp_socket.sendto(message, client_addr)
+        else:
+            print("this type of serialization is not supported")
